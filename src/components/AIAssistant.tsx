@@ -11,7 +11,7 @@ La teva personalitat:
 - Proper, càlid i entusiasta de la gastronomia
 - Respostes curtes i útils (màxim 3 frases llevat que calgui més)
 - Sempre en català (llevat que l'usuari t'escrigui en castellà o anglès, llavors adapta't)
-- Usa emojis moderadament 🍽️✨
+- Usa emojis moderadament
 
 El que pots ajudar:
 - Com usar LauSai (capturar moments, valorar, compartir, mapa)
@@ -31,12 +31,11 @@ export function AIAssistant() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Greeting on first open
   useEffect(() => {
     if (open && messages.length === 0) {
       setMessages([{
         role: 'assistant',
-        content: 'Hola! Sóc en Sai, el teu assistent gastronòmic 🍽️ Com puc ajudar-te avui?'
+        content: 'Hola! Sóc en Sai, el teu assistent gastronòmic 🥑 Com puc ajudar-te avui?'
       }])
       setTimeout(() => inputRef.current?.focus(), 300)
     }
@@ -94,11 +93,15 @@ export function AIAssistant() {
           style={{ zIndex: 30, boxShadow: '0 8px 40px rgba(0,0,0,0.5)' }}
         >
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 py-3 shrink-0"
-            style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)' }}>
-            <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-xl shrink-0">
-              🍽️
-            </div>
+          <div
+            className="flex items-center gap-3 px-4 py-3 shrink-0"
+            style={{ background: 'linear-gradient(135deg, #4d7c0f, #166534)' }}
+          >
+            <img
+              src="/icons/avocado.png"
+              alt="Sai"
+              className="w-9 h-9 object-contain shrink-0"
+            />
             <div className="flex-1 min-w-0">
               <p className="font-display text-white font-bold text-sm">Sai</p>
               <p className="font-body text-white/70 text-xs">Assistent LauSai</p>
@@ -118,25 +121,24 @@ export function AIAssistant() {
             style={{ background: 'rgba(15,5,0,0.92)', backdropFilter: 'blur(20px)' }}
           >
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
+              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.role === 'assistant' && (
-                  <div className="w-7 h-7 rounded-full bg-sunset-500/30 border border-sunset-400/30 flex items-center justify-center text-sm shrink-0 mr-2 mt-1">
-                    🍽️
-                  </div>
+                  <img
+                    src="/icons/avocado.png"
+                    alt="Sai"
+                    className="w-7 h-7 object-contain shrink-0 mr-2 mt-1"
+                  />
                 )}
                 <div
                   className={`max-w-[75%] rounded-2xl px-3 py-2 font-body text-sm leading-relaxed ${
-                    msg.role === 'user'
-                      ? 'bg-sunset-500 text-white rounded-br-sm'
-                      : 'bg-white/8 text-white/85 rounded-bl-sm border border-white/8'
+                    msg.role === 'user' ? 'rounded-br-sm' : 'rounded-bl-sm'
                   }`}
                   style={{
                     background: msg.role === 'user'
                       ? 'linear-gradient(135deg, #f97316, #ea580c)'
-                      : 'rgba(255,255,255,0.07)'
+                      : 'rgba(255,255,255,0.07)',
+                    color: 'rgba(255,255,255,0.9)',
+                    border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
                   }}
                 >
                   {msg.content}
@@ -145,16 +147,14 @@ export function AIAssistant() {
             ))}
 
             {loading && (
-              <div className="flex justify-start">
-                <div className="w-7 h-7 rounded-full bg-sunset-500/30 border border-sunset-400/30 flex items-center justify-center text-sm shrink-0 mr-2">
-                  🍽️
-                </div>
+              <div className="flex justify-start items-center gap-2">
+                <img src="/icons/avocado.png" alt="Sai" className="w-7 h-7 object-contain shrink-0" />
                 <div className="glass rounded-2xl rounded-bl-sm px-4 py-3">
                   <div className="flex gap-1 items-center">
                     {[0,1,2].map(i => (
                       <div
                         key={i}
-                        className="w-1.5 h-1.5 rounded-full bg-sunset-400 animate-pulse-soft"
+                        className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse-soft"
                         style={{ animationDelay: `${i * 0.2}s` }}
                       />
                     ))}
@@ -175,7 +175,7 @@ export function AIAssistant() {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Escriu un missatge…"
+              placeholder="Escriu un missatge..."
               className="flex-1 bg-transparent text-white placeholder-white/30 font-body text-sm outline-none"
               style={{ minHeight: 36 }}
               disabled={loading}
@@ -187,7 +187,7 @@ export function AIAssistant() {
               style={{
                 minWidth: 36, minHeight: 36,
                 background: input.trim() && !loading
-                  ? 'linear-gradient(135deg, #f97316, #ea580c)'
+                  ? 'linear-gradient(135deg, #4d7c0f, #166534)'
                   : 'rgba(255,255,255,0.1)'
               }}
               aria-label="Enviar"
@@ -208,12 +208,12 @@ export function AIAssistant() {
               {[
                 'Com capturo un moment?',
                 'Com comparteixo una foto?',
-                'Per què cal activar la ubicació?',
+                'Per que cal activar la ubicacio?',
               ].map(q => (
                 <button
                   key={q}
                   onClick={() => { setInput(q); setTimeout(() => sendMessage(), 50) }}
-                  className="text-left text-xs font-body text-sunset-300/70 hover:text-sunset-300 px-3 py-1.5 rounded-xl hover:bg-sunset-500/10 transition-colors border border-white/5"
+                  className="text-left text-xs font-body text-green-400/70 hover:text-green-300 px-3 py-1.5 rounded-xl hover:bg-green-900/20 transition-colors border border-white/5"
                   style={{ minHeight: 32 }}
                 >
                   {q}
@@ -224,32 +224,35 @@ export function AIAssistant() {
         </div>
       )}
 
-      {/* FAB button */}
+      {/* FAB button - avocado */}
       <button
         onClick={() => setOpen(prev => !prev)}
-        className="fixed bottom-[88px] right-4 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90"
+        className="fixed bottom-[88px] right-4 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90"
         style={{
           zIndex: 30,
-          minWidth: 56, minHeight: 56,
-          background: open
-            ? 'rgba(30,10,0,0.9)'
-            : 'linear-gradient(135deg, #f97316, #c2410c)',
-          boxShadow: open
-            ? '0 4px 20px rgba(0,0,0,0.4)'
-            : '0 4px 24px rgba(249,115,22,0.5)',
-          border: '1.5px solid rgba(255,255,255,0.15)',
+          width: 60, height: 60,
+          minWidth: 60, minHeight: 60,
+          background: open ? 'rgba(15,30,5,0.9)' : 'transparent',
+          boxShadow: open ? '0 4px 20px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.3)',
+          border: open ? '1.5px solid rgba(255,255,255,0.15)' : 'none',
+          padding: open ? 6 : 0,
         }}
-        aria-label={open ? 'Tancar assistent' : 'Obrir assistent'}
+        aria-label={open ? 'Tancar assistent' : 'Obrir assistent Sai'}
       >
-        <span className="text-2xl transition-transform duration-300" style={{ transform: open ? 'rotate(45deg)' : 'rotate(0)' }}>
-          {open ? '✕' : '🍽️'}
-        </span>
+        {open ? (
+          <span className="text-white/80 text-xl">✕</span>
+        ) : (
+          <img
+            src="/icons/avocado.png"
+            alt="Sai - Assistent"
+            className="w-full h-full object-contain drop-shadow-lg animate-float"
+            style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))' }}
+          />
+        )}
 
         {/* New message badge */}
         {hasNew && !open && (
-          <span
-            className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-black animate-pulse"
-          />
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-black animate-pulse" />
         )}
       </button>
     </>

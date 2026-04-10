@@ -111,6 +111,7 @@ export default function App() {
         style={{
           height: showNav ? 'calc(100% - 64px)' : '100%',
           zIndex: 10,
+          position: 'relative',
         }}
       >
         {screen === 'home' && (
