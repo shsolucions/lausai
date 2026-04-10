@@ -5,7 +5,7 @@ interface Message {
   content: string
 }
 
-const SYSTEM_PROMPT = `Ets l'assistent de LauSai, una app web per capturar i recordar moments gastronòmics (esmorzars, dinars i sopars). El teu nom és Sai.
+const SYSTEM_PROMPT = `Ets l'assistent de LauSai, una app web per capturar i recordar moments gastronòmics (esmorzars, dinars i sopars). El teu nom és Sultan.
 
 La teva personalitat:
 - Proper, càlid i entusiasta de la gastronomia
@@ -35,7 +35,7 @@ export function AIAssistant() {
     if (open && messages.length === 0) {
       setMessages([{
         role: 'assistant',
-        content: 'Hola! Sóc en Sai, el teu assistent gastronòmic 🥑 Com puc ajudar-te avui?'
+        content: 'Hola! Sóc en Sultan, el teu assistent gastronòmic 🥑 Com puc ajudar-te avui?'
       }])
       setTimeout(() => inputRef.current?.focus(), 300)
     }
@@ -50,11 +50,9 @@ export function AIAssistant() {
     const text = input.trim()
     if (!text || loading) return
     setInput('')
-
     const newMessages: Message[] = [...messages, { role: 'user', content: text }]
     setMessages(newMessages)
     setLoading(true)
-
     try {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -73,7 +71,7 @@ export function AIAssistant() {
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'No he pogut connectar. Comprova la connexió i torna-ho a provar 🌐'
+        content: 'No he pogut connectar. Comprova la connexio i torna-ho a provar.'
       }])
     } finally {
       setLoading(false)
@@ -90,43 +88,41 @@ export function AIAssistant() {
       {open && (
         <div
           className="fixed bottom-24 right-4 w-80 max-h-[70vh] flex flex-col rounded-3xl overflow-hidden screen-enter"
-          style={{ zIndex: 30, boxShadow: '0 8px 40px rgba(0,0,0,0.5)' }}
+          style={{ zIndex: 30, boxShadow: '0 8px 40px rgba(0,0,0,0.6)' }}
         >
           {/* Header */}
           <div
             className="flex items-center gap-3 px-4 py-3 shrink-0"
-            style={{ background: 'linear-gradient(135deg, #4d7c0f, #166534)' }}
+            style={{ background: 'linear-gradient(135deg, #3f6212, #14532d)' }}
           >
             <img
               src="/icons/avocado.png"
-              alt="Sai"
-              className="w-9 h-9 object-contain shrink-0"
+              alt="Sultan"
+              style={{ width: 44, height: 44, objectFit: 'contain', flexShrink: 0 }}
             />
             <div className="flex-1 min-w-0">
-              <p className="font-display text-white font-bold text-sm">Sai</p>
+              <p className="font-display text-white font-bold text-sm">Sultan</p>
               <p className="font-body text-white/70 text-xs">Assistent LauSai</p>
             </div>
             <button
               onClick={() => setOpen(false)}
               className="text-white/60 hover:text-white w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"
               style={{ minWidth: 32, minHeight: 32 }}
-            >
-              ✕
-            </button>
+            >✕</button>
           </div>
 
           {/* Messages */}
           <div
             className="flex-1 overflow-y-auto p-4 flex flex-col gap-3"
-            style={{ background: 'rgba(15,5,0,0.92)', backdropFilter: 'blur(20px)' }}
+            style={{ background: 'rgba(10,20,5,0.93)', backdropFilter: 'blur(20px)' }}
           >
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.role === 'assistant' && (
                   <img
                     src="/icons/avocado.png"
-                    alt="Sai"
-                    className="w-7 h-7 object-contain shrink-0 mr-2 mt-1"
+                    alt="Sultan"
+                    style={{ width: 32, height: 32, objectFit: 'contain', flexShrink: 0, marginRight: 8, marginTop: 4 }}
                   />
                 )}
                 <div
@@ -137,7 +133,7 @@ export function AIAssistant() {
                     background: msg.role === 'user'
                       ? 'linear-gradient(135deg, #f97316, #ea580c)'
                       : 'rgba(255,255,255,0.07)',
-                    color: 'rgba(255,255,255,0.9)',
+                    color: 'rgba(255,255,255,0.92)',
                     border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
                   }}
                 >
@@ -148,15 +144,12 @@ export function AIAssistant() {
 
             {loading && (
               <div className="flex justify-start items-center gap-2">
-                <img src="/icons/avocado.png" alt="Sai" className="w-7 h-7 object-contain shrink-0" />
+                <img src="/icons/avocado.png" alt="Sultan" style={{ width: 32, height: 32, objectFit: 'contain', flexShrink: 0 }} />
                 <div className="glass rounded-2xl rounded-bl-sm px-4 py-3">
                   <div className="flex gap-1 items-center">
                     {[0,1,2].map(i => (
-                      <div
-                        key={i}
-                        className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse-soft"
-                        style={{ animationDelay: `${i * 0.2}s` }}
-                      />
+                      <div key={i} className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse-soft"
+                        style={{ animationDelay: `${i * 0.2}s` }} />
                     ))}
                   </div>
                 </div>
@@ -168,7 +161,7 @@ export function AIAssistant() {
           {/* Input */}
           <div
             className="flex items-center gap-2 p-3 shrink-0"
-            style={{ background: 'rgba(15,5,0,0.95)', borderTop: '1px solid rgba(255,255,255,0.08)' }}
+            style={{ background: 'rgba(10,20,5,0.97)', borderTop: '1px solid rgba(255,255,255,0.08)' }}
           >
             <input
               ref={inputRef}
@@ -186,9 +179,7 @@ export function AIAssistant() {
               className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-30"
               style={{
                 minWidth: 36, minHeight: 36,
-                background: input.trim() && !loading
-                  ? 'linear-gradient(135deg, #4d7c0f, #166534)'
-                  : 'rgba(255,255,255,0.1)'
+                background: input.trim() && !loading ? 'linear-gradient(135deg, #4d7c0f, #166534)' : 'rgba(255,255,255,0.1)'
               }}
               aria-label="Enviar"
             >
@@ -201,56 +192,52 @@ export function AIAssistant() {
 
           {/* Quick questions */}
           {messages.length <= 1 && (
-            <div
-              className="flex flex-col gap-1.5 px-3 pb-3"
-              style={{ background: 'rgba(15,5,0,0.95)' }}
-            >
-              {[
-                'Com capturo un moment?',
-                'Com comparteixo una foto?',
-                'Per que cal activar la ubicacio?',
-              ].map(q => (
+            <div className="flex flex-col gap-1.5 px-3 pb-3" style={{ background: 'rgba(10,20,5,0.97)' }}>
+              {['Com capturo un moment?', 'Com comparteixo una foto?', 'Per que cal activar la ubicacio?'].map(q => (
                 <button
                   key={q}
                   onClick={() => { setInput(q); setTimeout(() => sendMessage(), 50) }}
                   className="text-left text-xs font-body text-green-400/70 hover:text-green-300 px-3 py-1.5 rounded-xl hover:bg-green-900/20 transition-colors border border-white/5"
                   style={{ minHeight: 32 }}
-                >
-                  {q}
-                </button>
+                >{q}</button>
               ))}
             </div>
           )}
         </div>
       )}
 
-      {/* FAB button - avocado */}
+      {/* FAB — avocado gran, fons transparent */}
       <button
         onClick={() => setOpen(prev => !prev)}
-        className="fixed bottom-[88px] right-4 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90"
+        className="fixed bottom-[82px] right-3 transition-all duration-300 active:scale-90"
         style={{
           zIndex: 30,
-          width: 60, height: 60,
-          minWidth: 60, minHeight: 60,
-          background: open ? 'rgba(15,30,5,0.9)' : 'transparent',
-          boxShadow: open ? '0 4px 20px rgba(0,0,0,0.4)' : '0 4px 24px rgba(0,0,0,0.3)',
-          border: open ? '1.5px solid rgba(255,255,255,0.15)' : 'none',
-          padding: open ? 6 : 0,
+          width: 72, height: 72,
+          minWidth: 72, minHeight: 72,
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
         }}
-        aria-label={open ? 'Tancar assistent' : 'Obrir assistent Sai'}
+        aria-label={open ? 'Tancar assistent' : 'Obrir assistent Sultan'}
       >
         {open ? (
-          <span className="text-white/80 text-xl">✕</span>
+          <div className="w-full h-full rounded-full glass-dark flex items-center justify-center border border-white/20">
+            <span className="text-white/80 text-2xl">✕</span>
+          </div>
         ) : (
           <img
             src="/icons/avocado.png"
-            alt="Sai - Assistent"
-            className="w-full h-full object-contain drop-shadow-lg animate-float"
-            style={{ filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))' }}
+            alt="Sultan"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.5))',
+            }}
+            className="animate-float"
           />
         )}
 
-        {/* New message badge */}
         {hasNew && !open && (
           <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-black animate-pulse" />
         )}
