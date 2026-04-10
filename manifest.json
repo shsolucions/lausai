@@ -1,0 +1,31 @@
+{
+  "name": "LauSai - Captura el teu moment",
+  "short_name": "LauSai",
+  "description": "Captura el teu moment i fes-lo etern. Diari gastronòmic personal.",
+  "theme_color": "#f97316",
+  "background_color": "#1a0a00",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
