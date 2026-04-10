@@ -133,13 +133,13 @@ export function DiaryScreen({ onSelectMoment, refreshKey }: Props) {
             <div className="text-6xl animate-float">
               {filter === 'all' ? '🍽️' : MOMENT_LABELS[filter as MomentType]?.emoji}
             </div>
-            <p className="font-display text-white/60 text-lg">
+            <p className="font-display text-white/80 text-lg">
               {filter === 'all'
                 ? 'Encara no tens cap moment al diari'
                 : `Encara no tens cap ${MOMENT_LABELS[filter as MomentType]?.ca.toLowerCase()}`
               }
             </p>
-            <p className="font-body text-white/30 text-sm">
+            <p className="font-body text-white/55 text-sm">
               Fes la primera foto i comença a construir el teu record
             </p>
           </div>

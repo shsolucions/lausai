@@ -112,7 +112,7 @@ export function RatingScreen({ photo, momentType, onSaved, onBack }: Props) {
             <div key={cat.key} className="flex items-center gap-3">
               <span className="text-xl w-8 text-center">{cat.emoji}</span>
               <div className="flex-1">
-                <p className="font-body text-white/80 text-sm font-medium mb-1">{cat.label}</p>
+                <p className="font-body text-white text-sm font-medium mb-1">{cat.label}</p>
                 <StarRating
                   value={rating[cat.key]}
                   onChange={v => updateRating(cat.key, v)}
@@ -137,7 +137,7 @@ export function RatingScreen({ photo, momentType, onSaved, onBack }: Props) {
 
         {/* Note */}
         <div className="glass rounded-3xl p-5">
-          <label className="font-body text-white/70 text-sm font-medium block mb-2">
+          <label className="font-body text-white text-sm font-medium block mb-2">
             💬 Nota personal (opcional)
           </label>
           <textarea
@@ -153,7 +153,7 @@ export function RatingScreen({ photo, momentType, onSaved, onBack }: Props) {
 
         {/* Geolocation */}
         <div className="glass rounded-3xl p-5">
-          <p className="font-body text-white/70 text-sm font-medium mb-3">
+          <p className="font-body text-white text-sm font-medium mb-3">
             📍 Afegir ubicació (opcional)
           </p>
 

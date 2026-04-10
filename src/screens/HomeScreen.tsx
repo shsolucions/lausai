@@ -29,7 +29,7 @@ export function HomeScreen({ onCapture, onDiary, onMap }: Props) {
       <div className="px-6 pt-14 pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-body text-xs text-white/50 uppercase tracking-widest mb-0.5">
+            <p className="font-body text-xs text-white/70 uppercase tracking-widest mb-0.5 text-overlay">
               {today}
             </p>
             <h1 className="font-display text-4xl font-black text-white text-overlay leading-tight">
@@ -43,7 +43,7 @@ export function HomeScreen({ onCapture, onDiary, onMap }: Props) {
             </div>
           )}
         </div>
-        <p className="font-display italic text-white/70 text-sm mt-2 text-overlay">
+        <p className="font-display italic text-white/90 text-sm mt-2 text-overlay">
           captura el teu moment i fes-lo etern
         </p>
       </div>
@@ -106,10 +106,10 @@ export function HomeScreen({ onCapture, onDiary, onMap }: Props) {
             style={{ animationDelay: '0.2s', animationFillMode: 'both', opacity: 0 }}
           >
             <div className="text-5xl mb-3 animate-float">🍽️</div>
-            <p className="font-display text-white/80 text-lg font-medium">
+            <p className="font-display text-white font-medium">
               Encara no tens cap moment
             </p>
-            <p className="font-body text-white/40 text-sm mt-1">
+            <p className="font-body text-white/70 text-sm mt-1">
               Fes la primera foto i comença el teu diari
             </p>
           </div>
@@ -131,7 +131,7 @@ export function HomeScreen({ onCapture, onDiary, onMap }: Props) {
 
       {/* Bottom tagline */}
       <div className="px-6 pb-8 text-center">
-        <p className="font-body text-white/25 text-xs">
+        <p className="font-body text-white/50 text-xs text-overlay">
           Avui pot ser un gran dia gastronòmic ✨
         </p>
       </div>
