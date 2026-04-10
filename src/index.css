@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --sunset-horizon: 15, 85%, 55%;
+    --sunset-mid: 25, 90%, 45%;
+    --sunset-zenith: 250, 50%, 15%;
+    --sun-x: 50%;
+    --sun-size: 80px;
+    --sun-color: 48, 95%, 65%;
+    --cloud-opacity: 0.3;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    @apply h-full overflow-hidden;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: #1a0a00;
+  }
+
+  #root {
+    @apply h-full;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-white/20 rounded-full; }
+
+  /* Touch targets minimum 44px */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@layer components {
+  /* Glass card */
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .glass-amber {
+    background: rgba(251, 146, 60, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(251, 146, 60, 0.25);
+  }
+
+  /* Sunset text overlay */
+  .text-overlay {
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6), 0 0 20px rgba(0,0,0,0.3);
+  }
+
+  /* Screen transitions */
+  .screen-enter {
+    animation: screenEnter 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes screenEnter {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Rating stars */
+  .star-btn {
+    @apply text-3xl transition-all duration-150 cursor-pointer select-none;
+    filter: drop-shadow(0 0 4px rgba(251, 146, 60, 0.3));
+  }
+  .star-btn.active {
+    filter: drop-shadow(0 0 8px rgba(251, 146, 60, 0.7));
+    transform: scale(1.1);
+  }
+
+  /* Bottom nav */
+  .nav-btn {
+    @apply flex flex-col items-center justify-center gap-1 flex-1 py-2 transition-all duration-200;
+    min-height: 56px;
+  }
+  .nav-btn.active { @apply text-sunset-400; }
+  .nav-btn:not(.active) { @apply text-white/40; }
+
+  /* Moment chip */
+  .moment-chip {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-body font-medium;
+  }
+  .chip-breakfast { @apply bg-amber-400/20 text-amber-300 border border-amber-400/30; }
+  .chip-lunch { @apply bg-orange-400/20 text-orange-300 border border-orange-400/30; }
+  .chip-dinner { @apply bg-purple-400/20 text-purple-300 border border-purple-400/30; }
+
+  /* Primary button */
+  .btn-primary {
+    @apply flex items-center justify-center gap-2 w-full rounded-2xl font-body font-semibold text-white
+           transition-all duration-200 active:scale-95 select-none;
+    min-height: 56px;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    box-shadow: 0 4px 24px rgba(249, 115, 22, 0.4);
+  }
+  .btn-primary:hover { box-shadow: 0 6px 32px rgba(249, 115, 22, 0.55); }
+
+  .btn-secondary {
+    @apply flex items-center justify-center gap-2 w-full rounded-2xl font-body font-medium
+           text-white/80 border border-white/20 transition-all duration-200 active:scale-95;
+    min-height: 56px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Input */
+  .input-field {
+    @apply w-full rounded-xl px-4 py-3 text-white placeholder-white/40 outline-none
+           border border-white/15 transition-all duration-200 font-body;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(8px);
+    min-height: 48px;
+  }
+  .input-field:focus { @apply border-sunset-400/60; box-shadow: 0 0 0 3px rgba(249,115,22,0.15); }
+
+  /* Textarea */
+  .textarea-field {
+    @apply input-field resize-none;
+    min-height: 80px;
+  }
+
+  /* Leaflet overrides */
+  .leaflet-container {
+    background: #1a0a00 !important;
+    font-family: 'DM Sans', sans-serif !important;
+  }
+  .leaflet-popup-content-wrapper {
+    background: rgba(20, 10, 0, 0.9) !important;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 16px !important;
+    color: white !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  }
+  .leaflet-popup-tip { background: rgba(20, 10, 0, 0.9) !important; }
+  .leaflet-popup-close-button { color: rgba(255,255,255,0.6) !important; }
+}
+
+/* Leaflet fix */
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-map-pane svg,
+.leaflet-map-pane canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
